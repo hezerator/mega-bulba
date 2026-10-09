@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Мини-курс по Python</title>
+  <style>
+    :root { --primary: #3776ab; --bg: #f5f7fa; --text: #2c3e50; --accent: #e67e22; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 1rem; line-height: 1.5; }
+    .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    h1, h2, h3 { color: var(--primary); }
+    nav { margin-bottom: 2rem; }
+    nav button { background: none; border: 1px solid var(--primary); color: var(--primary); padding: 0.5rem 1rem; margin-right: 0.5rem; cursor: pointer; border-radius: 4px; }
+    nav button.active { background: var(--primary); color: #fff; }
+    section { display: none; animation: fadeIn 0.3s ease; }
+    section.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    pre { background: #1e1e1e; color: #d4d4d4; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+    code { font-family: Consolas, Monaco, monospace; }
+    .task { margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1rem; }
+    textarea { width: 100%; min-height: 120px; font-family: monospace; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; background: #fafafa; }
+    button.check { background: var(--accent); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; margin-top: 0.75rem; }
+    .result { margin-top: 0.75rem; padding: 0.75rem; border-radius: 6px; display: none; }
+    .ok { background: #d4edda; color: #155724; }
+    .fail { background: #f8d7da; color: #721c24; }
+    .hint { font-size: 0.9rem; color: #666; margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Мини-курс Python (в одном файле)</h1>
+    <p>Теория + практика в браузере. 5 тем, каждая с заданием и проверкой.</p>
+
+    <nav>
+      <button onclick="switchTab('intro')" class="active">Введение</button>
+      <button onclick="switchTab('variables')">Переменные</button>
+      <button onclick="switchTab('conditionals')">Условия</button>
+      <button onclick="switchTab('loops')">Циклы</button>
+      <button onclick="switchTab('functions')">Функции</button>
+    </nav>
+
+    <!-- Тема 1: Введение -->
+    <section id="intro" class="active">
+      <h2>1. Введение в Python</h2>
+      <p>Python — это язык программирования, который читается почти как английский. Его используют для веб‑сайтов, анализа данных, автоматизации и даже игр.</p>
+      <p>Программа на Python — это просто список команд. Интерпретатор читает их сверху вниз и выполняет по очереди.</p>
+      <pre><code>print("Привет, мир!")</code></pre>
+      <div class="task">
+        <h3>Задание</h3>
+        <p>Напиши код, который выводит фразу: <code>Я изучаю Python!</code></p>
+        <textarea id="task1" placeholder="Вставь сюда свой код..."></textarea>
+        <button class="check" onclick="checkTask(1, 'print(\"Я изучаю Python!\")')">Проверить</button>
+        <div id="res1" class="result"></div>
+      </div>
+    </section>
+
+    <!-- Тема 2: Переменные -->
+    <section id="variables">
+      <h2>2. Переменные и типы данных</h2>
+      <p>Переменная — это «коробка» с именем, в которой хранится значение. В Python тип определяется автоматически.</p>
+      <pre><code>name = "Алиса"
+age = 25
+is_student = True</code></pre>
+      <p>Можно выводить так:</p>
+      <pre><code>print(name)
+print(age)</code></pre>
+      <div class="task">
+        <h3>Задание</h3>
+        <p>Создай переменные: <code>city = "Москва"</code> и <code>population = 13000000</code>, затем выведи их.</p>
+        <textarea id="task2" placeholder="city = ...&#10;population = ...&#10;print(...)"></textarea>
+        <button class="check" onclick="checkTask(2, 'city = \"Москва\"\npopulation = 13000000\nprint(city)\nprint(population)')">Проверить</button>
+        <div id="res2" class="result"></div>
+        <p class="hint">Важно: порядок строк и точные названия переменных имеют значение.</p>
+      </div>
+    </section>
+
+    <!-- Тема 3: Условия -->
+    <section id="conditionals">
+      <h2>3. Условия (if/else)</h2>
+      <p>Условные конструкции позволяют программе принимать решения. Ключевое слово <code>if</code> проверяет условие, а <code>else</code> срабатывает, если оно ложно.</p>
+      <pre><code>age = 17
+if age >= 18:
+    print("Доступ разрешён")
+else:
+    print("Доступ запрещён")</code></pre>
+      <div class="task">
+        <h3>Задание</h3>
+        <p>Задай переменную <code>score = 85</code>. Если <code>score >= 90</code>, выведи <code>"Отлично"</code>, иначе — <code>"Хорошо"</code>.</p>
+        <textarea id="task3" placeholder="score = ...&#10;if ...:&#10;    ...&#10;else:&#10;    ..."></textarea>
+        <button class="check" onclick="checkTask(3, 'score = 85\nif score >= 90:\n    print(\"Отлично\")\nelse:\n    print(\"Хорошо\")')">Проверить</button>
+        <div id="res3" class="result"></div>
+      </div>
+    </section>
+
+    <!-- Тема 4: Циклы -->
+    <section id="loops">
+      <h2>4. Циклы (for / while)</h2>
+      <p>Циклы повторяют действия. <code>for</code> удобно использовать для перебора элементов, <code>while</code> — пока выполняется условие.</p>
+      <pre><code>for i in range(5):
+    print(i)</code></pre>
+      <div class="task">
+        <h3>Задание</h3>
+        <p>Выведи числа от 0 до 4 включительно с помощью цикла <code>for</code>.</p>
+        <textarea id="task4" placeholder="for ...:&#10;    print(...)"></textarea>
+        <button class="check" onclick="checkTask(4, 'for i in range(5):\n    print(i)')">Проверить</button>
+        <div id="res4" class="result"></div>
+      </div>
+    </section>
+
+    <!-- Тема 5: Функции -->
+    <section id="functions">
+      <h2>5. Функции</h2>
+      <p>Функция — это переиспользуемый блок кода. Объявляется через <code>def</code>, вызывается по имени.</p>
+      <pre><code>def greet(name):
+    return f"Привет, {name}!"
+
+print(greet("Анна"))</code></pre>
+      <div class="task">
+        <h3>Задание</h3>
+        <p>Определи функцию <code>square(x)</code>, которая возвращает квадрат числа <code>x</code>. Вызови её для <code>5</code> и выведи результат.</p>
+        <textarea id="task5" placeholder="def square(x):&#10;    ...&#10;print(...)"></textarea>
+        <button class="check" onclick="checkTask(5, 'def square(x):\n    return x * x\n\nprint(square(5))')">Проверить</button>
+        <div id="res5" class="result"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function switchTab(id) {
+      document.querySelectorAll('section').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function checkTask(num, expected) {
+      const userCode = document.getElementById(`task${num}`).value.trim();
+      const resEl = document.getElementById(`res${num}`);
+      resEl.className = 'result';
+
+      // Простая нормализация: убираем лишние пробелы в начале строк, приводим к одному виду
+      const normalize = str => str
+        .split('\n')
+        .map(line => line.trim())
+        .filter(line => line.length > 0)
+        .join('\n');
+
+      if (normalize(userCode) === normalize(expected)) {
+        resEl.textContent = '✅ Верно! Молодец.';
+        resEl.classList.add('ok');
+      } else {
+        resEl.textContent = '❌ Пока не совпадает. Проверь отступы, названия переменных и порядок строк.';
+        resEl.classList.add('fail');
+      }
+    }
+  </script>
+</body>
+</html>
